@@ -11,16 +11,16 @@ public class Paragraph implements Element {
 
     @Override
     public void add(Element element) {
-        throw new UnsupportedOperationException("Cannot add element to Paragraph");
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void remove(Element element) {
-        throw new UnsupportedOperationException("Cannot remove element from Paragraph");
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Element get(int index) {
-        throw new UnsupportedOperationException("Paragraph has no child elements");
+        throw new UnsupportedOperationException();
     }
 }
