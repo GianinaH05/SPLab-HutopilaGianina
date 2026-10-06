@@ -1,7 +1,13 @@
 package clase;
 public interface Element{
     public void print();
-    void add(Element element);
-    void remove(Element element);
-    Element get(int index);
+    default void add(Element element){
+        throw new UnsupportedOperationException("Nu este suportat");
+    }
+    default void remove(Element element) {
+        throw new UnsupportedOperationException("Nu este suportat");
+    }
+    default Element get(int index){
+        throw new UnsupportedOperationException("Nu este suportat");
+    }
 }
