@@ -5,6 +5,7 @@ public interface Element{
         throw new UnsupportedOperationException("Nu este suportat");
     }
     default void remove(Element element) {
+
         throw new UnsupportedOperationException("Nu este suportat");
     }
     default Element get(int index){
