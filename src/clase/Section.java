@@ -39,5 +39,6 @@ public class Section implements Element {
     public Element get(int index){
         return elements.get(index);
     }
+    public String getTitle(){return title;}
 
 }
