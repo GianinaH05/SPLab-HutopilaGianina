@@ -19,6 +19,13 @@ public class Section implements Element {
         System.out.println("--sfarsit--" + title);
     }
     @Override
+    public void accept(Visitor vis){
+        vis.visit(this);
+        for(Element i : elements){
+            i.accept(vis);
+        }
+    }
+    @Override
     public void add(Element element){
         if(element != null)
             elements.add(element);

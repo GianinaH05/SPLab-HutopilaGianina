@@ -12,4 +12,8 @@ public class TableOfContents implements Element{
     public void print() {
         System.out.println("Table of contents :" + text);
     }
+    @Override
+    public void accept(Visitor vis){
+        vis.visit(this);
+    }
 }

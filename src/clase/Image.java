@@ -19,6 +19,11 @@ public class Image implements Element,Picture{
     }
 
     @Override
+    public void accept(Visitor vis){
+        vis.visit(this);
+    }
+
+    @Override
     public String url() {
         return url;
     }
