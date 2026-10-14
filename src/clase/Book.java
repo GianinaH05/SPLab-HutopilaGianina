@@ -35,4 +35,10 @@ public class Book {
     public Book(String title) {
         this.title = title;
     }
+    public void accept(Visitor vis){
+        vis.visit(this);
+        for(Element i : elements){
+            i.accept(vis);
+        }
+    }
 }

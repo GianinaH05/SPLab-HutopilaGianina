@@ -21,4 +21,8 @@ public class Paragraph implements Element {
         else
             System.out.println(text);
     }
+    @Override
+    public void accept(Visitor vis){
+        vis.visit(this);
+    }
 }

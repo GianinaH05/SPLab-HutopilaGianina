@@ -14,7 +14,10 @@ public class ImageProxy implements Element,Picture{
         realImage = loadImage();
         realImage.print();
     }
-
+    @Override
+    public void accept(Visitor vis){
+        vis.visit(this);
+    }
     @Override
     public String url() {
         return url;

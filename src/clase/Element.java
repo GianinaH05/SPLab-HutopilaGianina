@@ -11,4 +11,5 @@ public interface Element{
     default Element get(int index){
         throw new UnsupportedOperationException("Nu este suportat");
     }
+    public void accept(Visitor vis);
 }
