@@ -1,4 +1,4 @@
-package clase;
+package ro.uvt.clase;
 
 import java.awt.Dimension;
 import java.util.concurrent.TimeUnit;

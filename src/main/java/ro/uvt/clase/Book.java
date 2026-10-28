@@ -1,4 +1,4 @@
-package clase;
+package ro.uvt.clase;
 import java.util.ArrayList;
 import java.util.List;
 

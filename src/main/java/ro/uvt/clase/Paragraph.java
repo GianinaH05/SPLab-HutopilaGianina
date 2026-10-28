@@ -1,6 +1,4 @@
-package clase;
-
-import java.awt.desktop.SystemEventListener;
+package ro.uvt.clase;
 
 public class Paragraph implements Element {
     private String text;

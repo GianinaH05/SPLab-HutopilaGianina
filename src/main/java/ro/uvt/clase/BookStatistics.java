@@ -1,4 +1,4 @@
-package clase;
+package ro.uvt.clase;
 
 public class BookStatistics implements Visitor{
     private int section;

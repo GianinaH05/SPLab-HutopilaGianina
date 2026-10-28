@@ -14,11 +14,9 @@ public class MySpringApplication {
     // Spring Dependency Injection Context
     //
     // Gets a handle of dependency injection context
-        ApplicationContext context =
-                SpringApplication.run(MySpringApplication.class, args);
+        ApplicationContext context = SpringApplication.run(MySpringApplication.class, args);
 // Gets an instance of TransientComponent from the DI context
-        TransientComponent transientBean =
-                context.getBean(TransientComponent.class);
+        TransientComponent transientBean = context.getBean(TransientComponent.class);
         transientBean.operation();
 // Note that every time an instance is required,
 // the DI context creates a new one
@@ -28,8 +26,7 @@ public class MySpringApplication {
 // Note that the unique instance was created while
 // application was loaded, before creating
 // the transient instances
-        SingletonComponent singletonBean =
-                context.getBean(SingletonComponent.class);
+        SingletonComponent singletonBean = context.getBean(SingletonComponent.class);
         singletonBean.operation();
 // Note that every time an instance is required,
 // the DI returns the same unique one

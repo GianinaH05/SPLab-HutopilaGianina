@@ -1,4 +1,4 @@
-package clase;
+package ro.uvt.clase;
 public class Table implements Element{
     private String text;
     public Table(String text){
