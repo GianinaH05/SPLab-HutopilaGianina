@@ -1,4 +1,4 @@
-package clase;
+package ro.uvt.clase;
 public class Author {
     public String name;
     public String surname;
