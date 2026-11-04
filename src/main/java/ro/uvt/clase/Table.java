@@ -1,6 +1,11 @@
 package ro.uvt.clase;
-public class Table implements Element{
+
+import jakarta.persistence.Entity;
+
+@Entity
+public class Table extends BaseElement{
     private String text;
+    public Table(){}
     public Table(String text){
         this.text = text;
     }

@@ -1,11 +1,17 @@
 package ro.uvt.clase;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
+
 import java.awt.Dimension;
 
-public class ImageProxy implements Element,Picture{
+@Entity
+public class ImageProxy extends BaseElement implements Picture{
     private String url;
     private Dimension dim;
+    @OneToOne
     private Image realImage;
+    public ImageProxy(){}
     public ImageProxy(String url){
         this.url = url;
     }

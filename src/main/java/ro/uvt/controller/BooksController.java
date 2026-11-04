@@ -3,6 +3,7 @@ package ro.uvt.controller;
 import org.springframework.web.bind.annotation.*;
 import ro.uvt.clase.Book;
 import ro.uvt.command.*;
+import ro.uvt.presistance.BooksRepository;
 import ro.uvt.services.BooksService;
 
 import java.util.List;
@@ -11,10 +12,12 @@ import java.util.List;
 @RequestMapping("/books")
 public class BooksController {
 
+    private final CommandContext commandContext;
     private final BooksService booksService;
 
-    public BooksController(BooksService booksService) {
+    public BooksController(BooksService booksService, BooksRepository booksRepository) {
         this.booksService = booksService;
+        this.commandContext = new CommandContext(booksRepository);
     }
 
     @GetMapping
@@ -31,13 +34,13 @@ public class BooksController {
 
     @PostMapping
     public Book postBook(@RequestBody Book book) {
-        Command<Book> command = new CreateBookCommand(booksService, book);
+        Command<Book> command = new CreateBookCommand(commandContext, book);
         return command.execute();
     }
 
     @PutMapping("/{id}")
     public Book putBook(@PathVariable int id, @RequestBody Book book) {
-        Command<Book> command = new UpdateBookCommand(booksService, id, book);
+        Command<Book> command = new UpdateBookCommand(commandContext,id, book);
         return command.execute();
     }
 

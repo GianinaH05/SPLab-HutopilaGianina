@@ -1,18 +1,39 @@
 package ro.uvt.clase;
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Book {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String title;
+
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Author> authorList = new ArrayList<>();
-    private List<Element> elements = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<BaseElement> elements = new ArrayList<>();
+    public Book(){}
+    public Book(String title) {
+        this.title = title;
+    }
+    public void accept(Visitor vis){
+        vis.visit(this);
+        for(Element i : elements){
+            i.accept(vis);
+        }
+    }
     public void addAuthor(Author author) {
         if (author != null) {
             authorList.add(author);
         }
     }
 
-    public void addContent(Element element) {
+    public void addContent(BaseElement element) {
         if (element != null) {
             elements.add(element);
         }
@@ -32,13 +53,12 @@ public class Book {
         }
 
     }
-    public Book(String title) {
-        this.title = title;
+
+    public Long getId() {
+        return id;
     }
-    public void accept(Visitor vis){
-        vis.visit(this);
-        for(Element i : elements){
-            i.accept(vis);
-        }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

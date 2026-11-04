@@ -1,9 +1,15 @@
 package ro.uvt.clase;
 
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+
 import java.util.List;
 
-public class TableOfContents implements Element{
+@Entity
+public class TableOfContents extends BaseElement{
+    @ElementCollection
     private List<String> text;
+    public TableOfContents(){}
     public TableOfContents(List<String> text){
         this.text = text;
     }

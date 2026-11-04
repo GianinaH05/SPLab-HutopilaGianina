@@ -1,10 +1,13 @@
 package ro.uvt.clase;
 
+import jakarta.persistence.Entity;
+
 import java.awt.Dimension;
 import java.util.concurrent.TimeUnit;
-
-public class Image implements Element,Picture{
+@Entity
+public class Image extends BaseElement implements Picture{
     private String url;
+    public Image(){}
     public Image(String url){
         this.url = url;
         try {

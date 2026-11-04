@@ -1,7 +1,18 @@
 package ro.uvt.clase;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
+@Entity
 public class Author {
+    @Id
+    @GeneratedValue
+    private Long Id;
+
     public String name;
     public String surname;
+    public Author(){}
     public Author (String name,String surname){
         this.name = name;
         this.surname = surname;

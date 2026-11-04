@@ -1,11 +1,20 @@
 package ro.uvt.clase;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Section implements Element {
+@Entity
+public class Section extends BaseElement {
     private String title;
-    private List<Element> elements = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "section_id")
+    private List<BaseElement> elements = new ArrayList<>();
+    public Section(){}
     public Section(String title){
         this.title = title;
     }
@@ -27,13 +36,15 @@ public class Section implements Element {
     }
     @Override
     public void add(Element element){
-        if(element != null)
-            elements.add(element);
+        if (element instanceof BaseElement baseElement) {
+            elements.add(baseElement);
+        } else {
+            throw new IllegalArgumentException("Element must extend BaseElement for persistence");
+        }
     }
     @Override
     public void remove(Element element) {
-        if(element != null)
-            elements.remove(element);
+        elements.remove(element);
     }
     @Override
     public Element get(int index){

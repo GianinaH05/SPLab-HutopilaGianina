@@ -1,4 +1,5 @@
 package ro.uvt.clase;
+
 public interface Element{
     public void print();
     default void add(Element element){
