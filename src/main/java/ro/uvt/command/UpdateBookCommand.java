@@ -18,7 +18,6 @@ public class UpdateBookCommand implements Command<Book> {
     @Override
     public Book execute() {
         BooksRepository repository = context.getBooksRepository();
-        // Set the ID so JPA knows to UPDATE instead of INSERT
         book.setId((long) id);
         return repository.save(book);
     }
