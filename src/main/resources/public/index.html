@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<h1>All Books</h1>
+<a href="javascript:void(0)" onclick="sendRequest()">Fetch Books</a>
+<div id="sseDiv"></div>
+
+<script>
+    function sendRequest() {
+        const sseDiv = document.getElementById("sseDiv");
+
+        if (typeof(EventSource) !== "undefined") {
+            sseDiv.innerHTML = "No books found yet. Waiting for new books...";
+            const source = new EventSource(`http://localhost:8080/books-sse`);
+            let hasBooks = false;
+
+            source.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                if (!hasBooks) {
+                    sseDiv.innerHTML = ""; // Clear the "No books" message on first book
+                    hasBooks = true;
+                }
+                sseDiv.innerHTML += data.id + "<br>";
+            };
+
+            source.onerror = function() {
+                source.close();
+                if (!hasBooks) {
+                    sseDiv.innerHTML = "No books found (connection closed).";
+                }
+            };
+        } else {
+            sseDiv.innerHTML = "Your browser does not support server-sent events.";
+        }
+    }
+</script>
+</body>
+</html>
