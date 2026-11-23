@@ -3,6 +3,7 @@ package ro.uvt.controller;
 import org.springframework.web.bind.annotation.*;
 import ro.uvt.clase.Book;
 import ro.uvt.command.*;
+import ro.uvt.observer.AllBooksSubject;
 import ro.uvt.presistance.BooksRepository;
 import ro.uvt.services.BooksService;
 
@@ -14,10 +15,12 @@ public class BooksController {
 
     private final CommandContext commandContext;
     private final BooksService booksService;
+    private final AllBooksSubject allBooksSubject;
 
-    public BooksController(BooksService booksService, BooksRepository booksRepository) {
+    public BooksController(BooksService booksService, BooksRepository booksRepository, AllBooksSubject allBooksSubject) {
         this.booksService = booksService;
         this.commandContext = new CommandContext(booksRepository);
+        this.allBooksSubject = allBooksSubject;
     }
 
     @GetMapping
@@ -32,12 +35,6 @@ public class BooksController {
         return command.execute();
     }
 
-    @PostMapping
-    public Book postBook(@RequestBody Book book) {
-        Command<Book> command = new CreateBookCommand(commandContext, book);
-        return command.execute();
-    }
-
     @PutMapping("/{id}")
     public Book putBook(@PathVariable int id, @RequestBody Book book) {
         Command<Book> command = new UpdateBookCommand(commandContext,id, book);
@@ -48,5 +45,12 @@ public class BooksController {
     public void deleteBook(@PathVariable int id) {
         Command<Void> command = new DeleteBookCommand(booksService, id);
         command.execute();
+    }
+    @PostMapping
+    public Book postBook(@RequestBody Book book) {
+        Command<Book> command = new CreateBookCommand(commandContext, book);
+        Book savedBook = command.execute();
+        allBooksSubject.notifyObservers(savedBook);
+        return savedBook;
     }
 }
